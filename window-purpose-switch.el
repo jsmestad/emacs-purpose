@@ -200,7 +200,9 @@ this case, `purpose-display-at-right-width' is ignored."
   "Display BUFFER in WINDOW, but don't select it.
 BUFFER, WINDOW, TYPE and ALIST have the same meaning as
 `window--display-buffer'.'"
-  (window--display-buffer buffer window type alist dedicated))
+  (when (>= emacs-major-version 27)
+    (window--display-buffer buffer window type alist)
+    (window--display-buffer buffer window type alist dedicated)))
 
 (defun purpose-window-buffer-reusable-p (window buffer)
   "Return non-nil if WINDOW can be reused to display BUFFER.
